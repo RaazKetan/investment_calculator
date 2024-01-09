@@ -1,65 +1,88 @@
-import React from 'react';
-import {useState} from 'react';
-const UserInput = ()=>{
+import React, { useState } from "react";
 
-  const UserInput = ()=>{
-    const [userInput, setuserInput] = useState({
-      'current-savings': 1000,
-      'yearly-contribution': 1200,
-      'expected-return': 7,
-      'duration': 10,
-    })
-  }
+const intialUserInput = {
+  "current-savings": 10000,
+  "yearly-contribution": 1200,
+  "expected-return": 7,
+  duration: 10,
+};
 
-    const submitHandler = (event) => {
-        event.preventDefault();
-    };
-    const resetHandler = (event) => {
-     
-    };
-    const inputChangeHandler = (input, value)=>{
-        setuserInput((prevInput)=>{
-            return {
-                ...prevInput,
-                [input]: value,
+const UserInput = () => {
+  const [UserInput, setUserInput] = useState(intialUserInput);
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+  };
+  const resetHandler = (event) => {
+    setUserInput(intialUserInput);
+  };
+  const inputChangeHandler = (input, value) => {
+    setUserInput((prevInput) => {
+      return {
+        ...prevInput,
+        [input]: value,
+      };
+    });
+  };
+
+  return (
+    <form onSubmit={submitHandler} className="form">
+      <div className="input-group">
+        <p>
+          <label htmlFor="current-savings">Current Savings (₹)</label>
+          <input
+            onChange={(event) =>
+              inputChangeHandler("current-savings", event.target.value)
             }
-        })
-    }
-    
-return(
-    <form onSubmit = {submitHandler} className="form">
-    <div className="input-group">
-           <p>
-             <label htmlFor="current-savings">Current Savings (₹)</label>
-             <input onChange = {(event)=> inputChangeHandler('current-savings', event.target.value)} type="number" id="current-savings" />
-           </p>
-           <p>
-             <label htmlFor="yearly-contribution">Yearly Savings (₹)</label>
-             <input onChange = {(event)=> inputChangeHandler('yearly-contribution', event.target.value)} type="number" id="yearly-contribution" />
-           </p>
-         </div>
-         <div className="input-group">
-           <p>
-             <label htmlFor="expected-return">
-               Expected Interest (%, per year)
-             </label>
-             <input onChange = {(event)=> inputChangeHandler('expected-return', event.target.value)} type="number" id="expected-return" />
-           </p>
-           <p>
-             <label htmlFor="duration">Investment Duration (years)</label>
-             <input onChange = {(event)=> inputChangeHandler('duration', event.target.value)} type="number" id="duration" />
-           </p>
-         </div>
-         <p className="actions">
-           <button onClick = {resetHandler} type="reset" className="buttonAlt">
-             Reset
-           </button>
-           <button type="submit" className="button">
-             Calculate
-           </button>
-         </p>
+            type="number"
+            id="current-savings"
+          />
+        </p>
+        <p>
+          <label htmlFor="yearly-contribution">Yearly Savings (₹)</label>
+          <input
+            onChange={(event) =>
+              inputChangeHandler("yearly-contribution", event.target.value)
+            }
+            type="number"
+            id="yearly-contribution"
+          />
+        </p>
+      </div>
+      <div className="input-group">
+        <p>
+          <label htmlFor="expected-return">
+            Expected Interest (%, per year)
+          </label>
+          <input
+            onChange={(event) =>
+              inputChangeHandler("expected-return", event.target.value)
+            }
+            type="number"
+            id="expected-return"
+          />
+        </p>
+        <p>
+          <label htmlFor="duration">Investment Duration (years)</label>
+          <input
+            onChange={(event) =>
+              inputChangeHandler("duration", event.target.value)
+            }
+            type="number"
+            id="duration"
+          />
+        </p>
+      </div>
+      <p className="actions">
+        <button onClick={resetHandler} type="reset" className="buttonAlt">
+          Reset
+        </button>
+        <button type="submit" className="button">
+          Calculate
+        </button>
+      </p>
     </form>
-)
-}
+  );
+};
 
 export default UserInput;
