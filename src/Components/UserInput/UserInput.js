@@ -7,11 +7,13 @@ const intialUserInput = {
   duration: 10,
 };
 
-const UserInput = () => {
+const UserInput = (props) => {
   const [UserInput, setUserInput] = useState(intialUserInput);
 
   const submitHandler = (event) => {
     event.preventDefault();
+
+    props.onCalculate(UserInput); // pass the user input to the parent component
   };
   const resetHandler = (event) => {
     setUserInput(intialUserInput);
